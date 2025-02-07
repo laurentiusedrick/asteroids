@@ -23,7 +23,7 @@ def main():
   Player.containers = (updateable, drawable)
   Asteroid.containers = (updateable, drawable, asteroids)
   AsteroidField.containers = (updateable)
-  Shot.containers = (updateable, drawable)
+  Shot.containers = (updateable, drawable, shots)
   
 
   player = Player(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2)
@@ -46,6 +46,11 @@ def main():
        if a.collision(player):
           print("Game over!")
           return
+       
+       for s in shots:
+        if a.collision(s):
+            s.kill()
+            a.kill()
        
     dt = clock.tick(60) / 1000
 
